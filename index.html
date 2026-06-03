@@ -37,14 +37,12 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .sym-btn{padding:6px 12px;background:var(--panel);border:1.5px solid var(--rule);border-radius:6px;font-family:var(--mono);font-size:10px;color:var(--ink2);cursor:pointer;transition:.15s;white-space:nowrap}
 .sym-btn.on{background:var(--j2);border-color:var(--j2);color:#fff}
 .sym-btn:hover:not(.on){border-color:var(--j2);color:var(--ink)}
-/* PALETTES */
 .pal{display:flex;flex-wrap:wrap;gap:5px;padding:10px 14px;background:var(--bg2);border-top:1px solid var(--rule);align-items:center}
 .sw{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:.12s;flex-shrink:0}
 .sw:hover{transform:scale(1.2)}
 .sw.on{border-color:var(--gold);transform:scale(1.15)}
 .clr-btn{padding:5px 12px;background:transparent;border:1px solid var(--rule);border-radius:6px;color:var(--ink3);font-family:var(--mono);font-size:10px;cursor:pointer;margin-left:auto}
 .clr-btn:hover{border-color:var(--j3);color:var(--j3)}
-/* TESSELLATE SPECIFIC */
 .two-col{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
 .tile-editor{flex-shrink:0}
 .tile-preview-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);text-align:center;padding:8px 0 4px}
@@ -57,23 +55,47 @@ canvas.reflect-cvs,canvas.rot-cvs{display:block;width:100%;height:auto;cursor:cr
 .disc.show{display:block}
 @keyframes fin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .disc-text{font-family:var(--serif);font-style:italic;font-size:14px;color:#fff;line-height:1.6}
-/* PRACTICE */
-.prac-card{background:var(--panel);border:1.5px solid var(--rule);border-radius:12px;padding:20px;margin-bottom:14px}
-.prac-q{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink);margin-bottom:14px;line-height:1.6}
-.ans-opts{display:flex;gap:8px;flex-wrap:wrap}
-.ans-opt{padding:10px 16px;background:var(--panel2);border:1.5px solid var(--rule);border-radius:8px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;transition:.2s;color:var(--ink2)}
+
+/* ── PRACTICE (visual) ── */
+.prac-shell{background:var(--panel);border:2px solid var(--rule);border-radius:12px;overflow:hidden;margin-bottom:14px;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
+.prac-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--panel2);border-bottom:1px solid var(--rule)}
+.prac-tag{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3)}
+.prac-score{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gold)}
+.prac-body{padding:16px}
+.prac-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+/* SVG visual pane */
+.prac-visual{background:var(--bg2);border:1.5px solid var(--rule);border-radius:10px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.prac-visual-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3)}
+#prac-svg{overflow:visible}
+/* Question pane */
+.prac-q-pane{display:flex;flex-direction:column;gap:12px}
+.prac-q{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink);line-height:1.65}
+.prac-type-tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:4px}
+.prac-type-tag.sym{background:rgba(26,79,176,0.3);color:#90CAF9;border:1px solid rgba(26,79,176,0.5)}
+.prac-type-tag.rot{background:rgba(123,45,139,0.3);color:#CE93D8;border:1px solid rgba(123,45,139,0.5)}
+.prac-type-tag.tess{background:rgba(13,122,92,0.3);color:#80CBC4;border:1px solid rgba(13,122,92,0.5)}
+.prac-type-tag.refl{background:rgba(184,130,8,0.3);color:#FFD54F;border:1px solid rgba(184,130,8,0.5)}
+.ans-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ans-opt{padding:10px 12px;background:var(--panel2);border:1.5px solid var(--rule);border-radius:8px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;transition:.2s;color:var(--ink2);text-align:center}
 .ans-opt:hover{border-color:var(--j1);color:var(--ink)}
 .ans-opt.correct{background:rgba(13,122,92,0.3);border-color:var(--j4);color:#A8EDD8;animation:cpop .35s}
 .ans-opt.wrong{background:rgba(184,40,10,0.2);border-color:var(--j3);color:#FFBBAA;animation:cshk .35s}
 @keyframes cpop{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
 @keyframes cshk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.pq-fb{min-height:20px;margin-top:10px;font-family:var(--serif);font-style:italic;font-size:13px}
+.pq-fb{min-height:18px;font-family:var(--serif);font-style:italic;font-size:13px;line-height:1.5}
 .pq-fb.ok{color:#6EE7B7}.pq-fb.no{color:#FCA5A5}
-.next-btn{margin-top:12px;background:var(--j1);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer}
+.next-btn{background:var(--j1);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;align-self:flex-start}
+.next-btn:hover{background:#9B3DAB}
+/* score bar */
+.score-bar-wrap{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:2px;overflow:hidden}
+.score-bar{height:100%;background:linear-gradient(90deg,var(--j4),var(--gold));border-radius:2px;transition:width .4s ease;width:0%}
+
 @media(max-width:580px){
   .header{height:auto;padding:10px 14px;flex-wrap:wrap;gap:8px}.header-tabs{width:100%;justify-content:center}
   .two-col{flex-direction:column}
   .tile-editor{width:100%}
+  .prac-grid{grid-template-columns:1fr}
+  .ans-opts{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -99,11 +121,9 @@ canvas.reflect-cvs,canvas.rot-cvs{display:block;width:100%;height:auto;cursor:cr
 
 <div class="main">
 
-<!-- TESSELLATE: draw a tile, watch it tile the floor live -->
+<!-- TESSELLATE -->
 <div class="pnl on" id="pnl-tess">
-  <div class="desc">
-    <strong style="font-style:normal;color:var(--gold)">Draw your tile</strong> on the left grid — every stroke instantly tiles across the whole floor on the right. Try different shapes and see what happens!
-  </div>
+  <div class="desc"><strong style="font-style:normal;color:var(--gold)">Draw your tile</strong> on the left grid — every stroke instantly tiles across the whole floor on the right. Try different shapes and see what happens!</div>
   <div class="card">
     <div class="bar">
       <span class="bar-title">Tile Designer</span>
@@ -125,9 +145,7 @@ canvas.reflect-cvs,canvas.rot-cvs{display:block;width:100%;height:auto;cursor:cr
       </div>
     </div>
   </div>
-  <div class="disc show" id="tess-disc">
-    <div class="disc-text" id="tess-disc-text">Draw anything on the tile grid. Every stroke repeats across the floor — that is tessellation! The tile fills the floor with no gaps and no overlaps because it repeats perfectly edge to edge.</div>
-  </div>
+  <div class="disc show" id="tess-disc"><div class="disc-text" id="tess-disc-text">Draw anything on the tile grid. Every stroke repeats across the floor — that is tessellation! The tile fills the floor with no gaps and no overlaps because it repeats perfectly edge to edge.</div></div>
 </div>
 
 <!-- REFLECT -->
@@ -167,266 +185,338 @@ canvas.reflect-cvs,canvas.rot-cvs{display:block;width:100%;height:auto;cursor:cr
   </div>
 </div>
 
-<!-- PRACTICE -->
+<!-- PRACTICE: visual SVG questions -->
 <div class="pnl" id="pnl-practice">
-  <div class="prac-card">
-    <div class="prac-q" id="pq-text">Loading…</div>
-    <div class="ans-opts" id="pq-opts"></div>
-    <div class="pq-fb" id="pq-fb"></div>
-    <button class="next-btn" onclick="nextPQ()">Next question</button>
+  <div class="prac-shell">
+    <div class="prac-bar">
+      <div>
+        <div class="prac-tag">Visual Challenge</div>
+        <div class="score-bar-wrap" style="width:140px;margin-top:5px"><div class="score-bar" id="score-bar"></div></div>
+      </div>
+      <div class="prac-score"><span id="sc-correct">0</span> / <span id="sc-total">0</span> correct</div>
+    </div>
+    <div class="prac-body">
+      <div class="prac-grid">
+        <!-- Left: animated SVG visual -->
+        <div class="prac-visual">
+          <div class="prac-visual-label" id="prac-vis-label">Shape</div>
+          <svg id="prac-svg" viewBox="0 0 200 200" width="190" height="190"></svg>
+          <div id="prac-vis-caption" style="font-family:var(--mono);font-size:10px;color:var(--ink3);text-align:center;line-height:1.5"></div>
+        </div>
+        <!-- Right: question + options -->
+        <div class="prac-q-pane">
+          <div>
+            <div class="prac-type-tag sym" id="prac-type-tag">Symmetry</div>
+            <div class="prac-q" id="prac-q">Loading…</div>
+          </div>
+          <div class="ans-opts" id="prac-opts"></div>
+          <div class="pq-fb" id="pq-fb"></div>
+          <button class="next-btn" onclick="nextPQ()">Next →</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-</div>
+</div><!-- /main -->
 <script>
 const COLORS=['#C01878','#7B2D8B','#1A4FB0','#B8280A','#0D7A5C','#B88208','#E06020','#1565C0'];
-const TILE=160; // tile editor is 160x160 px
-const GRID=16;  // each pixel block = 16px → 10×10 grid
+const TILE=160,GRID=16;
 
-// ── TESSELLATE ───────────────────────────────────────────────
+// ── TESSELLATE ────────────────────────────────────────────────
 const tileCvs=document.getElementById('tile-cvs');
 const tileCtx=tileCvs.getContext('2d');
 const floorCvs=document.getElementById('floor-cvs');
 const floorCtx=floorCvs.getContext('2d');
-
-let tessColor=COLORS[0];
-let tessTool='pen';
-let tileDrawing=false;
-
-// tile pixel data: 10×10 array of color strings or null
-const COLS=TILE/GRID, ROWS=TILE/GRID;
+let tessColor=COLORS[0],tessTool='pen',tileDrawing=false;
+const COLS=TILE/GRID,ROWS=TILE/GRID;
 let tilePixels=Array.from({length:ROWS},()=>Array(COLS).fill(null));
-
 function buildTessPal(){
   const p=document.getElementById('tess-pal');p.innerHTML='';
-  COLORS.forEach((c,i)=>{
-    const sw=document.createElement('div');
-    sw.className='sw'+(i===0?' on':'');sw.style.background=c;
-    sw.onclick=()=>{tessColor=c;p.querySelectorAll('.sw').forEach((x,j)=>x.classList.toggle('on',j===i))};
-    p.appendChild(sw);
-  });
+  COLORS.forEach((c,i)=>{const sw=document.createElement('div');sw.className='sw'+(i===0?' on':'');sw.style.background=c;sw.onclick=()=>{tessColor=c;p.querySelectorAll('.sw').forEach((x,j)=>x.classList.toggle('on',j===i))};p.appendChild(sw)});
 }
-
-function setTessTool(t){
-  tessTool=t;
-  document.getElementById('tess-pen-btn').classList.toggle('on',t==='pen');
-  document.getElementById('tess-era-btn').classList.toggle('on',t==='erase');
-  tileCvs.style.cursor=t==='pen'?'crosshair':'cell';
-}
-
-function clearTile(){
-  tilePixels=Array.from({length:ROWS},()=>Array(COLS).fill(null));
-  drawTile();drawFloor();
-}
-
+function setTessTool(t){tessTool=t;document.getElementById('tess-pen-btn').classList.toggle('on',t==='pen');document.getElementById('tess-era-btn').classList.toggle('on',t==='erase');tileCvs.style.cursor=t==='pen'?'crosshair':'cell'}
+function clearTile(){tilePixels=Array.from({length:ROWS},()=>Array(COLS).fill(null));drawTile();drawFloor()}
 function drawTile(){
   tileCtx.fillStyle='#120820';tileCtx.fillRect(0,0,TILE,TILE);
-  // grid lines
   tileCtx.strokeStyle='rgba(255,255,255,0.07)';tileCtx.lineWidth=0.5;
   for(let i=0;i<=COLS;i++){tileCtx.beginPath();tileCtx.moveTo(i*GRID,0);tileCtx.lineTo(i*GRID,TILE);tileCtx.stroke()}
   for(let j=0;j<=ROWS;j++){tileCtx.beginPath();tileCtx.moveTo(0,j*GRID);tileCtx.lineTo(TILE,j*GRID);tileCtx.stroke()}
-  // pixels
-  tilePixels.forEach((row,r)=>row.forEach((c,col)=>{
-    if(c){tileCtx.fillStyle=c;tileCtx.fillRect(col*GRID+1,r*GRID+1,GRID-1,GRID-1)}
-  }));
+  tilePixels.forEach((row,r)=>row.forEach((c,col)=>{if(c){tileCtx.fillStyle=c;tileCtx.fillRect(col*GRID+1,r*GRID+1,GRID-1,GRID-1)}}));
 }
-
 function drawFloor(){
-  const FW=floorCvs.width,FH=floorCvs.height;
-  floorCtx.fillStyle='#120820';floorCtx.fillRect(0,0,FW,FH);
-  // tile the floor with repeating copies of tilePixels
-  for(let ty=0;ty*TILE<FH+TILE;ty++){
-    for(let tx=0;tx*TILE<FW+TILE;tx++){
-      tilePixels.forEach((row,r)=>row.forEach((c,col)=>{
-        if(c){
-          floorCtx.fillStyle=c;
-          floorCtx.fillRect(tx*TILE+col*GRID,ty*TILE+r*GRID,GRID,GRID);
-        }
-      }));
-      // tile border hint
-      floorCtx.strokeStyle='rgba(255,255,255,0.04)';floorCtx.lineWidth=1;
-      floorCtx.strokeRect(tx*TILE,ty*TILE,TILE,TILE);
-    }
-  }
+  const FW=floorCvs.width,FH=floorCvs.height;floorCtx.fillStyle='#120820';floorCtx.fillRect(0,0,FW,FH);
+  for(let ty=0;ty*TILE<FH+TILE;ty++){for(let tx=0;tx*TILE<FW+TILE;tx++){
+    tilePixels.forEach((row,r)=>row.forEach((c,col)=>{if(c){floorCtx.fillStyle=c;floorCtx.fillRect(tx*TILE+col*GRID,ty*TILE+r*GRID,GRID,GRID)}}));
+    floorCtx.strokeStyle='rgba(255,255,255,0.04)';floorCtx.lineWidth=1;floorCtx.strokeRect(tx*TILE,ty*TILE,TILE,TILE);
+  }}
 }
-
-function initFloor(){
-  const parent=floorCvs.parentElement;
-  const fw=Math.max(200,parent.offsetWidth>0?parent.offsetWidth-10:400);
-  floorCvs.width=fw;floorCvs.height=Math.round(fw*0.65);
-  floorCvs.style.height='auto';
-  drawFloor();
-}
-
-function getTileXY(e){
-  const rect=tileCvs.getBoundingClientRect();
-  const sx=TILE/rect.width,sy=TILE/rect.height;
-  const src=e.touches?e.touches[0]:e;
-  const c=Math.floor((src.clientX-rect.left)*sx/GRID);
-  const r=Math.floor((src.clientY-rect.top)*sy/GRID);
-  return[Math.max(0,Math.min(COLS-1,c)),Math.max(0,Math.min(ROWS-1,r))];
-}
-
-function paintTile(e){
-  const[c,r]=getTileXY(e);
-  tilePixels[r][c]=tessTool==='erase'?null:tessColor;
-  drawTile();drawFloor();
-}
-
+function initFloor(){const parent=floorCvs.parentElement;const fw=Math.max(200,parent.offsetWidth>0?parent.offsetWidth-10:400);floorCvs.width=fw;floorCvs.height=Math.round(fw*0.65);floorCvs.style.height='auto';drawFloor()}
+function getTileXY(e){const rect=tileCvs.getBoundingClientRect();const sx=TILE/rect.width,sy=TILE/rect.height;const src=e.touches?e.touches[0]:e;const c=Math.floor((src.clientX-rect.left)*sx/GRID);const r=Math.floor((src.clientY-rect.top)*sy/GRID);return[Math.max(0,Math.min(COLS-1,c)),Math.max(0,Math.min(ROWS-1,r))]}
+function paintTile(e){const[c,r]=getTileXY(e);tilePixels[r][c]=tessTool==='erase'?null:tessColor;drawTile();drawFloor()}
 tileCvs.addEventListener('mousedown',e=>{tileDrawing=true;paintTile(e)});
 window.addEventListener('mousemove',e=>{if(tileDrawing)paintTile(e)});
-window.addEventListener('mouseup',()=>tileDrawing=false);
 tileCvs.addEventListener('touchstart',e=>{e.preventDefault();tileDrawing=true;paintTile(e)},{passive:false});
 window.addEventListener('touchmove',e=>{if(tileDrawing){e.preventDefault();paintTile(e)}},{passive:false});
-window.addEventListener('touchend',()=>tileDrawing=false);
 
-// ── REFLECT ──────────────────────────────────────────────────
-let reflAxis='v',reflDrawing=false,reflPixels=[];
-let reflColor=COLORS[0];
+// ── REFLECT ───────────────────────────────────────────────────
+let reflAxis='v',reflDrawing=false,reflPixels=[],reflColor=COLORS[0];
 const reflCvs=document.getElementById('refl-cvs');
 const reflCtx=reflCvs.getContext('2d');
-
-function buildPal(id,setFn,currentCol){
+function buildPal(id,setFn){
   const p=document.getElementById(id);p.innerHTML='<span style="font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:1px;text-transform:uppercase;margin-right:4px">Colour</span>';
-  COLORS.forEach((c,i)=>{
-    const sw=document.createElement('div');sw.className='sw'+(i===0?' on':'');sw.style.background=c;
-    sw.onclick=()=>{setFn(c);p.querySelectorAll('.sw').forEach((x,j)=>x.classList.toggle('on',j===i))};
-    p.appendChild(sw);
-  });
+  COLORS.forEach((c,i)=>{const sw=document.createElement('div');sw.className='sw'+(i===0?' on':'');sw.style.background=c;sw.onclick=()=>{setFn(c);p.querySelectorAll('.sw').forEach((x,j)=>x.classList.toggle('on',j===i))};p.appendChild(sw)});
   const clr=document.createElement('button');clr.className='clr-btn';clr.textContent='Clear';
-  clr.onclick=()=>{
-    if(id==='refl-pal'){reflPixels=[];drawRefl()}
-    if(id==='rot-pal'){rotPixels=[];drawRot()}
-  };
-  p.appendChild(clr);
+  clr.onclick=()=>{if(id==='refl-pal'){reflPixels=[];drawRefl()}if(id==='rot-pal'){rotPixels=[];drawRot()}};p.appendChild(clr);
 }
-
-function initRefl(){
-  const mw=Math.min(reflCvs.parentElement.offsetWidth||700,800);
-  reflCvs.width=mw;reflCvs.height=Math.min(300,Math.round(mw*0.42));
-  drawRefl();
-}
+function initRefl(){const mw=Math.min(reflCvs.parentElement.offsetWidth||700,800);reflCvs.width=mw;reflCvs.height=Math.min(300,Math.round(mw*0.42));drawRefl()}
 function drawRefl(){
-  const W=reflCvs.width,H=reflCvs.height;
-  reflCtx.fillStyle='#120820';reflCtx.fillRect(0,0,W,H);
+  const W=reflCvs.width,H=reflCvs.height;reflCtx.fillStyle='#120820';reflCtx.fillRect(0,0,W,H);
   reflCtx.strokeStyle='rgba(212,175,55,0.55)';reflCtx.lineWidth=2;reflCtx.setLineDash([8,6]);
-  if(reflAxis==='v'){reflCtx.beginPath();reflCtx.moveTo(W/2,0);reflCtx.lineTo(W/2,H);reflCtx.stroke();}
-  else{reflCtx.beginPath();reflCtx.moveTo(0,H/2);reflCtx.lineTo(W,H/2);reflCtx.stroke();}
-  reflCtx.setLineDash([]);
-  const sz=12;
-  reflPixels.forEach(p=>{
-    reflCtx.fillStyle=p.c;reflCtx.fillRect(p.x,p.y,sz,sz);
-    reflCtx.globalAlpha=0.65;
-    if(reflAxis==='v')reflCtx.fillRect(W-p.x-sz,p.y,sz,sz);
-    else reflCtx.fillRect(p.x,H-p.y-sz,sz,sz);
-    reflCtx.globalAlpha=1;
-  });
-  if(reflPixels.length>8){
-    document.getElementById('refl-disc').classList.add('show');
-    document.getElementById('refl-disc-text').textContent='A line of symmetry splits a shape into two mirror halves. Every point is the same distance from the line on both sides.';
-  }
+  if(reflAxis==='v'){reflCtx.beginPath();reflCtx.moveTo(W/2,0);reflCtx.lineTo(W/2,H);reflCtx.stroke()}
+  else{reflCtx.beginPath();reflCtx.moveTo(0,H/2);reflCtx.lineTo(W,H/2);reflCtx.stroke()}
+  reflCtx.setLineDash([]);const sz=12;
+  reflPixels.forEach(p=>{reflCtx.fillStyle=p.c;reflCtx.fillRect(p.x,p.y,sz,sz);reflCtx.globalAlpha=0.65;if(reflAxis==='v')reflCtx.fillRect(W-p.x-sz,p.y,sz,sz);else reflCtx.fillRect(p.x,H-p.y-sz,sz,sz);reflCtx.globalAlpha=1});
+  if(reflPixels.length>8){document.getElementById('refl-disc').classList.add('show');document.getElementById('refl-disc-text').textContent='A line of symmetry splits a shape into two mirror halves. Every point is the same distance from the line on both sides.'}
 }
-function reflCell(e){
-  const rect=reflCvs.getBoundingClientRect();
-  const sx=reflCvs.width/rect.width;
-  const src=e.touches?e.touches[0]:e;
-  const x=Math.floor((src.clientX-rect.left)*sx/12)*12;
-  const y=Math.floor((src.clientY-rect.top)*sx/12)*12;
-  const W=reflCvs.width;
-  if((reflAxis==='v'&&x<W/2)||(reflAxis==='h'&&y<reflCvs.height/2))
-    reflPixels.push({x,y,c:reflColor});
-  drawRefl();
-}
+function reflCell(e){const rect=reflCvs.getBoundingClientRect();const sx=reflCvs.width/rect.width;const src=e.touches?e.touches[0]:e;const x=Math.floor((src.clientX-rect.left)*sx/12)*12;const y=Math.floor((src.clientY-rect.top)*sx/12)*12;const W=reflCvs.width;if((reflAxis==='v'&&x<W/2)||(reflAxis==='h'&&y<reflCvs.height/2))reflPixels.push({x,y,c:reflColor});drawRefl()}
 reflCvs.addEventListener('mousedown',e=>{reflDrawing=true;reflCell(e)});
 window.addEventListener('mousemove',e=>{if(reflDrawing)reflCell(e)});
 reflCvs.addEventListener('touchstart',e=>{e.preventDefault();reflDrawing=true;reflCell(e.touches[0])},{passive:false});
 reflCvs.addEventListener('touchmove',e=>{e.preventDefault();if(reflDrawing)reflCell(e.touches[0])},{passive:false});
-function setReflAxis(a){
-  reflAxis=a;reflPixels=[];
-  ['v','h'].forEach(x=>document.getElementById('rb-'+x).classList.toggle('on',x===a));
-  drawRefl();
-}
+function setReflAxis(a){reflAxis=a;reflPixels=[];['v','h'].forEach(x=>document.getElementById('rb-'+x).classList.toggle('on',x===a));drawRefl()}
 
-// ── ROTATE ───────────────────────────────────────────────────
-let rotCopies=2,rotDrawing=false,rotPixels=[];
-let rotColor=COLORS[0];
-const rotCvs=document.getElementById('rot-cvs');
-const rotCtx=rotCvs.getContext('2d');
-function initRot(){
-  const mw=Math.min(rotCvs.parentElement.offsetWidth||700,800);
-  rotCvs.width=mw;rotCvs.height=Math.min(300,Math.round(mw*0.42));
-  drawRot();
-}
+// ── ROTATE ────────────────────────────────────────────────────
+let rotCopies=2,rotDrawing=false,rotPixels=[],rotColor=COLORS[0];
+const rotCvs=document.getElementById('rot-cvs');const rotCtx=rotCvs.getContext('2d');
+function initRot(){const mw=Math.min(rotCvs.parentElement.offsetWidth||700,800);rotCvs.width=mw;rotCvs.height=Math.min(300,Math.round(mw*0.42));drawRot()}
 function drawRot(){
-  const W=rotCvs.width,H=rotCvs.height,cx=W/2,cy=H/2;
-  rotCtx.fillStyle='#120820';rotCtx.fillRect(0,0,W,H);
-  for(let i=0;i<rotCopies;i++){
-    const a=i*(Math.PI*2/rotCopies);
-    rotCtx.strokeStyle='rgba(212,175,55,0.15)';rotCtx.lineWidth=1;rotCtx.setLineDash([5,5]);
-    rotCtx.beginPath();rotCtx.moveTo(cx,cy);rotCtx.lineTo(cx+Math.cos(a)*Math.max(W,H),cy+Math.sin(a)*Math.max(W,H));rotCtx.stroke();
-    rotCtx.setLineDash([]);
-  }
+  const W=rotCvs.width,H=rotCvs.height,cx=W/2,cy=H/2;rotCtx.fillStyle='#120820';rotCtx.fillRect(0,0,W,H);
+  for(let i=0;i<rotCopies;i++){const a=i*(Math.PI*2/rotCopies);rotCtx.strokeStyle='rgba(212,175,55,0.15)';rotCtx.lineWidth=1;rotCtx.setLineDash([5,5]);rotCtx.beginPath();rotCtx.moveTo(cx,cy);rotCtx.lineTo(cx+Math.cos(a)*Math.max(W,H),cy+Math.sin(a)*Math.max(W,H));rotCtx.stroke();rotCtx.setLineDash([])}
   const sz=12;
-  rotPixels.forEach(p=>{
-    for(let k=0;k<rotCopies;k++){
-      const a=k*(Math.PI*2/rotCopies);
-      const dx=p.x-cx,dy=p.y-cy;
-      const rx=dx*Math.cos(a)-dy*Math.sin(a)+cx;
-      const ry=dx*Math.sin(a)+dy*Math.cos(a)+cy;
-      rotCtx.globalAlpha=k===0?1:0.7;
-      rotCtx.fillStyle=p.c;rotCtx.fillRect(rx,ry,sz,sz);
-    }
-  });
-  rotCtx.globalAlpha=1;
-  rotCtx.fillStyle=COLORS[4];rotCtx.beginPath();rotCtx.arc(cx,cy,5,0,Math.PI*2);rotCtx.fill();
+  rotPixels.forEach(p=>{for(let k=0;k<rotCopies;k++){const a=k*(Math.PI*2/rotCopies);const dx=p.x-cx,dy=p.y-cy;const rx=dx*Math.cos(a)-dy*Math.sin(a)+cx;const ry=dx*Math.sin(a)+dy*Math.cos(a)+cy;rotCtx.globalAlpha=k===0?1:0.7;rotCtx.fillStyle=p.c;rotCtx.fillRect(rx,ry,sz,sz)}});
+  rotCtx.globalAlpha=1;rotCtx.fillStyle=COLORS[4];rotCtx.beginPath();rotCtx.arc(cx,cy,5,0,Math.PI*2);rotCtx.fill();
 }
-function rotCell(e){
-  const rect=rotCvs.getBoundingClientRect();
-  const sx=rotCvs.width/rect.width;
-  const src=e.touches?e.touches[0]:e;
-  rotPixels.push({x:Math.floor((src.clientX-rect.left)*sx/12)*12,y:Math.floor((src.clientY-rect.top)*sx/12)*12,c:rotColor});
-  drawRot();
-}
+function rotCell(e){const rect=rotCvs.getBoundingClientRect();const sx=rotCvs.width/rect.width;const src=e.touches?e.touches[0]:e;rotPixels.push({x:Math.floor((src.clientX-rect.left)*sx/12)*12,y:Math.floor((src.clientY-rect.top)*sx/12)*12,c:rotColor});drawRot()}
 rotCvs.addEventListener('mousedown',e=>{rotDrawing=true;rotCell(e)});
 window.addEventListener('mousemove',e=>{if(rotDrawing)rotCell(e)});
 rotCvs.addEventListener('touchstart',e=>{e.preventDefault();rotDrawing=true;rotCell(e.touches[0])},{passive:false});
 rotCvs.addEventListener('touchmove',e=>{e.preventDefault();if(rotDrawing)rotCell(e.touches[0])},{passive:false});
-window.addEventListener('mouseup',()=>{reflDrawing=false;rotDrawing=false;});
-window.addEventListener('touchend',()=>{reflDrawing=false;rotDrawing=false;});
-function setRotCopies(n){
-  rotCopies=n;rotPixels=[];
-  [2,3,4,6,8].forEach(x=>document.getElementById('rot-'+x).classList.toggle('on',x===n));
-  drawRot();
+window.addEventListener('mouseup',()=>{tileDrawing=false;reflDrawing=false;rotDrawing=false});
+window.addEventListener('touchend',()=>{tileDrawing=false;reflDrawing=false;rotDrawing=false});
+function setRotCopies(n){rotCopies=n;rotPixels=[];[2,3,4,6,8].forEach(x=>document.getElementById('rot-'+x).classList.toggle('on',x===n));drawRot()}
+
+// ── PRACTICE: visual SVG questions ────────────────────────────
+let pqCorrect=0,pqTotal=0,pqUsed=[];
+
+// SVG generators — each returns {svgHTML, label, caption}
+const SHAPES={
+  square(fill='#7B2D8B',stroke='#CE93D8'){return`<polygon points="40,40 160,40 160,160 40,160" fill="${fill}33" stroke="${stroke}" stroke-width="2.5"/>`},
+  equilateral(fill='#0D7A5C',stroke='#80CBC4'){return`<polygon points="100,28 172,152 28,152" fill="${fill}33" stroke="${stroke}" stroke-width="2.5"/>`},
+  hexagon(fill='#1A4FB0',stroke='#90CAF9'){const pts=Array.from({length:6},(_,i)=>{const a=(i*60-30)*Math.PI/180;return`${100+72*Math.cos(a)},${100+72*Math.sin(a)}`}).join(' ');return`<polygon points="${pts}" fill="${fill}33" stroke="${stroke}" stroke-width="2.5"/>`},
+  rectangle(fill='#B88208',stroke='#FFD54F'){return`<polygon points="25,70 175,70 175,130 25,130" fill="${fill}33" stroke="${stroke}" stroke-width="2.5"/>`},
+  pentagon(fill='#B8280A',stroke='#FFBBAA'){const pts=Array.from({length:5},(_,i)=>{const a=(i*72-90)*Math.PI/180;return`${100+72*Math.cos(a)},${100+72*Math.sin(a)}`}).join(' ');return`<polygon points="${pts}" fill="${fill}33" stroke="${stroke}" stroke-width="2.5"/>`},
+  isosceles(fill='#C01878',stroke='#F48FB1'){return`<polygon points="100,30 170,160 30,160" fill="${fill}33" stroke="${stroke}" stroke-width="2.5"/>`},
+};
+
+// Line-of-symmetry helpers (draw dashed gold lines through center)
+function symLine(x1,y1,x2,y2,col='rgba(212,175,55,0.7)'){return`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="2" stroke-dasharray="7 5"/>`}
+function symLineLabel(x,y,text){return`<text x="${x}" y="${y}" fill="#D4AF37" font-family="Space Mono,monospace" font-size="11" text-anchor="middle">${text}</text>`}
+
+// Tess grid helpers: draws a tiny repeating mini-grid to suggest tessellation or gap
+function miniTessGrid(shape,gapColor=null){
+  // 3x3 arrangement of small shapes
+  const sc=0.38,off=62;let html='';
+  for(let tr=0;tr<3;tr++)for(let tc=0;tc<3;tc++){
+    const dx=(tc-1)*off,dy=(tr-1)*off;
+    html+=`<g transform="translate(${dx},${dy}) scale(${sc}) translate(${100*(1/sc-1)},${100*(1/sc-1)})">${shape}</g>`;
+  }
+  if(gapColor){// draw visible gap triangles
+    html+=`<polygon points="100,88 112,100 100,112 88,100" fill="${gapColor}" opacity=".5"/>`;
+  }
+  return html;
 }
 
-// ── PRACTICE ─────────────────────────────────────────────────
-const Qs=[
-  {q:'A square has how many lines of symmetry?',ans:'4',opts:['1','2','4','6'],exp:'A square has 4 lines of symmetry: 2 through midpoints, 2 diagonal.'},
-  {q:'Which shape does NOT tessellate on its own?',ans:'Regular pentagon',opts:['Equilateral triangle','Regular hexagon','Square','Regular pentagon'],exp:'Regular pentagons leave gaps — their corner angle (108\u00b0) does not divide 360\u00b0 evenly.'},
-  {q:'A regular hexagon has how many lines of symmetry?',ans:'6',opts:['3','4','6','8'],exp:'A regular hexagon has 6 lines of symmetry.'},
-  {q:'A rotation of 180\u00b0 is the same as:',ans:'A half turn',opts:['A quarter turn','A half turn','A full turn','A reflection'],exp:'180\u00b0 = exactly half of 360\u00b0.'},
-  {q:'Which shape has rotational symmetry of order 4?',ans:'Square',opts:['Triangle','Square','Pentagon','Circle'],exp:'A square looks the same after 90\u00b0, 180\u00b0, 270\u00b0, 360\u00b0 — that is order 4.'},
-  {q:'Equilateral triangles tessellate because their angle is 60\u00b0. How many meet at each point?',ans:'6',opts:['3','4','6','8'],exp:'60\u00b0 \u00d7 6 = 360\u00b0. Six triangles meet perfectly.'},
+// Rotation visual: draw n copies of a wedge mark around centre
+function rotVisual(n,col='#CE93D8'){
+  let html=`<circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
+  html+=`<circle cx="100" cy="100" r="4" fill="${col}"/>`;
+  for(let i=0;i<n;i++){
+    const a=i*(Math.PI*2/n)-Math.PI/2;
+    const ex=100+66*Math.cos(a),ey=100+66*Math.sin(a);
+    const wx=100+28*Math.cos(a+0.38),wy=100+28*Math.sin(a+0.38);
+    const wx2=100+28*Math.cos(a-0.38),wy2=100+28*Math.sin(a-0.38);
+    const op=i===0?1:0.5;
+    html+=`<polygon points="${ex},${ey} ${wx},${wy} ${wx2},${wy2}" fill="${col}" opacity="${op}"/>`;
+    // arc label for first sector
+    if(i===0){const deg=Math.round(360/n);html+=`<text x="${100+42*Math.cos(a)}" y="${100+42*Math.sin(a)+4}" fill="${col}" font-size="11" font-family="Space Mono,monospace" text-anchor="middle">${deg}°</text>`}
+  }
+  // rotation arrows between copies
+  for(let i=0;i<n;i++){
+    const a1=i*(Math.PI*2/n)-Math.PI/2,a2=(i+1)*(Math.PI*2/n)-Math.PI/2;
+    const amid=(a1+a2)/2;const ar=80;
+    html+=`<path d="M${100+ar*Math.cos(a1)},${100+ar*Math.sin(a1)} A${ar},${ar} 0 0,1 ${100+ar*Math.cos(a2)},${100+ar*Math.sin(a2)}" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1.5"/>`;
+  }
+  return html;
+}
+
+// Question bank — each is a function returning a question object
+const Q_BANK=[
+
+  // ── SYM: how many lines for a square ──
+  ()=>{
+    const lines=[symLine(100,30,100,170),symLine(30,100,170,100),symLine(40,40,160,160),symLine(160,40,40,160)];
+    return{type:'sym',typeLabel:'Symmetry',
+      svg:SHAPES.square()+lines.join(''),
+      label:'Square',
+      caption:'All symmetry lines shown in gold',
+      q:'How many lines of symmetry does a square have?',
+      ans:'4',opts:['1','2','4','8'],
+      exp:'2 through opposite midpoints + 2 diagonal = 4 lines total.'}}  ,
+
+  // ── SYM: equilateral triangle lines ──
+  ()=>{
+    const lines=[symLine(100,28,100,152),symLine(28,152,172,80),symLine(172,152,28,80)];
+    return{type:'sym',typeLabel:'Symmetry',
+      svg:SHAPES.equilateral()+lines.join(''),
+      label:'Equilateral triangle',caption:'Lines of symmetry shown',
+      q:'How many lines of symmetry does an equilateral triangle have?',
+      ans:'3',opts:['1','2','3','6'],
+      exp:'Each line runs from a vertex to the midpoint of the opposite side — 3 lines total.'}}  ,
+
+  // ── SYM: hexagon lines ──
+  ()=>{
+    const lines=[];
+    for(let i=0;i<3;i++){const a=i*60*Math.PI/180;lines.push(symLine(100+76*Math.cos(a),100+76*Math.sin(a),100-76*Math.cos(a),100-76*Math.sin(a)));lines.push(symLine(100+76*Math.cos(a+Math.PI/6*2),100+76*Math.sin(a+Math.PI/6*2),100-76*Math.cos(a+Math.PI/6*2),100-76*Math.sin(a+Math.PI/6*2)))}
+    return{type:'sym',typeLabel:'Symmetry',
+      svg:SHAPES.hexagon()+lines.join(''),
+      label:'Regular hexagon',caption:'6 symmetry lines shown',
+      q:'A regular hexagon has how many lines of symmetry?',
+      ans:'6',opts:['3','4','6','8'],
+      exp:'3 lines connect opposite vertices, 3 connect opposite edge midpoints — 6 total.'}}  ,
+
+  // ── SYM: rectangle vs square — note rectangle has 2 not 4 ──
+  ()=>{
+    // show a rectangle with only the 2 valid lines, and cross out diagonals
+    const valid=[symLine(100,60,100,140),symLine(25,100,175,100)];
+    const invalid=`<line x1="25" y1="70" x2="175" y2="130" stroke="rgba(184,40,10,0.55)" stroke-width="2" stroke-dasharray="5 4"/>
+      <line x1="175" y1="70" x2="25" y2="130" stroke="rgba(184,40,10,0.55)" stroke-width="2" stroke-dasharray="5 4"/>
+      <text x="152" y="68" fill="#FCA5A5" font-size="14" font-family="Space Mono,monospace">✗</text>
+      <text x="22" y="68" fill="#FCA5A5" font-size="14" font-family="Space Mono,monospace">✗</text>`;
+    return{type:'sym',typeLabel:'Symmetry',
+      svg:SHAPES.rectangle()+valid.join('')+invalid,
+      label:'Rectangle',caption:'Gold = valid lines · Red ✗ = not lines of symmetry',
+      q:'A rectangle (non-square) has how many lines of symmetry?',
+      ans:'2',opts:['0','1','2','4'],
+      exp:'Only through opposite midpoints — the diagonals are not lines of symmetry for a rectangle.'}}  ,
+
+  // ── TESS: equilateral triangle tessellates ──
+  ()=>{
+    const triSVG=SHAPES.equilateral('#0D7A5C','#80CBC4');
+    const grid=miniTessGrid(triSVG);
+    const angleLabel=`<text x="100" y="196" fill="#80CBC4" font-size="11" font-family="Space Mono,monospace" text-anchor="middle">60° × 6 = 360° ✓</text>`;
+    return{type:'tess',typeLabel:'Tessellation',
+      svg:grid+angleLabel,
+      label:'Equilateral triangle tiling',caption:'6 triangles meet at every corner',
+      q:'Equilateral triangles tessellate. How many must meet at each vertex to fill 360°?',
+      ans:'6',opts:['3','4','6','8'],
+      exp:'Each angle is 60°. 360 ÷ 60 = 6 triangles meet at every point with no gaps.'}}  ,
+
+  // ── TESS: pentagon does NOT tessellate ──
+  ()=>{
+    const pentSVG=SHAPES.pentagon('#B8280A','#FFBBAA');
+    const grid=miniTessGrid(pentSVG,'rgba(184,40,10,0.45)');
+    const gapLabel=`<text x="100" y="196" fill="#FCA5A5" font-size="11" font-family="Space Mono,monospace" text-anchor="middle">108° × 3 = 324° ✗ gap!</text>`;
+    return{type:'tess',typeLabel:'Tessellation',
+      svg:grid+gapLabel,
+      label:'Regular pentagon — gaps visible',caption:'Interior angle = 108° · 360 ÷ 108 ≠ whole number',
+      q:'Regular pentagons cannot tessellate on their own because…',
+      ans:'108° does not divide 360° evenly',
+      opts:['108° does not divide 360° evenly','They have too many sides','Their sides are too long','They have no symmetry'],
+      exp:'108° × 3 = 324°, × 4 = 432°. Neither fills 360° exactly — so gaps always remain.'}}  ,
+
+  // ── ROT: order of rotational symmetry of square ──
+  ()=>{
+    return{type:'rot',typeLabel:'Rotation',
+      svg:SHAPES.square()+rotVisual(4,'#CE93D8'),
+      label:'Square — rotational symmetry',caption:'Arrows show each 90° rotation',
+      q:'What is the order of rotational symmetry of a square?',
+      ans:'4',opts:['2','4','6','8'],
+      exp:'A square looks identical after 90°, 180°, 270°, 360° — that is 4 times, so order 4.'}}  ,
+
+  // ── ROT: equilateral triangle rotation ──
+  ()=>{
+    return{type:'rot',typeLabel:'Rotation',
+      svg:SHAPES.equilateral()+rotVisual(3,'#80CBC4'),
+      label:'Equilateral triangle — rotation',caption:'Looks the same 3 times in 360°',
+      q:'A rotation of 120° applied to this triangle gives the same shape. What is the order of rotational symmetry?',
+      ans:'3',opts:['2','3','6','12'],
+      exp:'120° × 3 = 360°. The triangle looks the same 3 times in a full turn — order 3.'}}  ,
+
+  // ── ROT: hexagon ──
+  ()=>{
+    return{type:'rot',typeLabel:'Rotation',
+      svg:SHAPES.hexagon()+rotVisual(6,'#90CAF9'),
+      label:'Regular hexagon — rotation',caption:'Order 6 — looks the same every 60°',
+      q:'A regular hexagon has rotational symmetry of order 6. How many degrees is each turn?',
+      ans:'60°',opts:['45°','60°','72°','90°'],
+      exp:'360° ÷ 6 = 60°. The hexagon matches itself every 60° rotation.'}}  ,
+
+  // ── REFL: identify axis ──
+  ()=>{
+    // draw an arrow + its reflection about a vertical line
+    const arrow=`<polygon points="60,80 80,60 80,72 110,72 110,88 80,88 80,100" fill="#7B2D8B88" stroke="#CE93D8" stroke-width="2"/>`;
+    const mirror=`<polygon points="140,80 120,60 120,72 90,72 90,88 120,88 120,100" fill="#0D7A5C44" stroke="#80CBC4" stroke-width="2" opacity=".7"/>`;
+    const line=`<line x1="100" y1="20" x2="100" y2="180" stroke="rgba(212,175,55,0.8)" stroke-width="2" stroke-dasharray="8 5"/>
+      <text x="106" y="18" fill="#D4AF37" font-size="11" font-family="Space Mono,monospace">mirror</text>`;
+    return{type:'refl',typeLabel:'Reflection',
+      svg:arrow+mirror+line,
+      label:'Reflected arrow',caption:'Purple original · Teal is the reflection',
+      q:'The teal arrow is a reflection of the purple arrow. What is the axis of reflection?',
+      ans:'Vertical line',opts:['Vertical line','Horizontal line','Diagonal line','No axis'],
+      exp:'The mirror line runs top to bottom — that is a vertical axis. Both arrows are the same distance from it.'}}  ,
 ];
-let pqUsed=[];
+
+function drawPracSVG(svgHTML){
+  document.getElementById('prac-svg').innerHTML=
+    `<rect width="200" height="200" rx="8" fill="#0D0818"/>`+
+    `<rect width="200" height="200" rx="8" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>`+
+    svgHTML;
+}
+
+function setTypeTag(type,label){
+  const el=document.getElementById('prac-type-tag');
+  el.textContent=label;
+  el.className='prac-type-tag '+type;
+}
+
 function nextPQ(){
-  if(pqUsed.length>=Qs.length)pqUsed=[];
-  let idx;do{idx=Math.floor(Math.random()*Qs.length)}while(pqUsed.includes(idx));
+  if(pqUsed.length>=Q_BANK.length)pqUsed=[];
+  let idx;do{idx=Math.floor(Math.random()*Q_BANK.length)}while(pqUsed.includes(idx));
   pqUsed.push(idx);
-  const q=Qs[idx];
-  document.getElementById('pq-text').textContent=q.q;
+  const q=Q_BANK[idx]();
+  drawPracSVG(q.svg);
+  document.getElementById('prac-vis-label').textContent=q.label;
+  document.getElementById('prac-vis-caption').textContent=q.caption;
+  setTypeTag(q.type,q.typeLabel);
+  document.getElementById('prac-q').textContent=q.q;
   document.getElementById('pq-fb').textContent='';
   document.getElementById('pq-fb').className='pq-fb';
-  const opts=document.getElementById('pq-opts');opts.innerHTML='';
+  const opts=document.getElementById('prac-opts');opts.innerHTML='';
   [...q.opts].sort(()=>Math.random()-.5).forEach(o=>{
     const b=document.createElement('button');b.className='ans-opt';b.textContent=o;
     b.onclick=()=>{
       opts.querySelectorAll('.ans-opt').forEach(x=>x.onclick=null);
-      const ok=o===q.ans;
+      const ok=o===q.ans;pqTotal++;
       b.classList.add(ok?'correct':'wrong');
+      if(ok)pqCorrect++;
       if(!ok)opts.querySelectorAll('.ans-opt').forEach(x=>{if(x.textContent===q.ans)x.classList.add('correct')});
-      document.getElementById('pq-fb').textContent=(ok?'\u2713 Correct! ':'\u2717 Not quite. ')+q.exp;
-      document.getElementById('pq-fb').className='pq-fb '+(ok?'ok':'no');
+      const fb=document.getElementById('pq-fb');
+      fb.textContent=(ok?'✓ Correct! ':'✗ Not quite. ')+q.exp;
+      fb.className='pq-fb '+(ok?'ok':'no');
+      document.getElementById('sc-correct').textContent=pqCorrect;
+      document.getElementById('sc-total').textContent=pqTotal;
+      document.getElementById('score-bar').style.width=(pqTotal>0?Math.round(pqCorrect/pqTotal*100):0)+'%';
     };
     opts.appendChild(b);
   });
@@ -447,13 +537,11 @@ window.addEventListener('resize',()=>{
   if(document.getElementById('pnl-rotate').classList.contains('on'))initRot();
 });
 
-// Init
 buildTessPal();
-buildPal('refl-pal',c=>reflColor=c,reflColor);
-buildPal('rot-pal',c=>rotColor=c,rotColor);
+buildPal('refl-pal',c=>reflColor=c);
+buildPal('rot-pal',c=>rotColor=c);
 drawTile();
-// defer floor until paint call -- but draw once after a tick so layout is known
-setTimeout(()=>{initFloor();},50);
+setTimeout(()=>{initFloor()},50);
 nextPQ();
 </script>
 </body>
